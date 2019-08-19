@@ -40,6 +40,7 @@ export function deserialize(rows: Array<any>): Keyboard {
   // Initialize with defaults
   let current: Key = new Key();
   let kbd = new Keyboard();
+  let cluster = { x: 0, y: 0 };
   var align = 4;
 
   for (var r = 0; r < rows.length; ++r) {
@@ -87,6 +88,16 @@ export function deserialize(rows: Array<any>): Keyboard {
             );
           }
           if (item.r != null) current.rotation_angle = item.r;
+          if (item.rx != null) {
+            current.rotation_x = cluster.x = item.rx;
+            current.x = cluster.x;
+            current.y = cluster.y;
+          }
+          if (item.ry != null) {
+            current.rotation_y = cluster.y = item.ry;
+            current.x = cluster.x;
+            current.y = cluster.y;
+          }
           if (item.rx != null) current.rotation_x = item.rx;
           if (item.ry != null) current.rotation_y = item.ry;
           if (item.a != null) align = item.a;
@@ -141,3 +152,4 @@ export function deserialize(rows: Array<any>): Keyboard {
   }
   return kbd;
 }
+
