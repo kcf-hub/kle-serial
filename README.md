@@ -94,14 +94,8 @@ kle.Serial.deserialize(rows: Array<any>): Keyboard
 - The first entry is optionally a keyboard metadata object.
 
 ```ts
-kle.Serial.parse(json5: string): Keyboard
+kle.Serial.parse(json: string): Keyboard
 ```
-
-- This function takes a JSON5-formatted string, parses it, then deserializes the
-  result into a `Keyboard` object.
-- [JSON5](https://json5.org/) is a simplified / lenient version of JSON that is
-  easier for humans to type; in particular, it doesn't require quotes around
-  property names. Any valid JSON string should also be a valid JSON5 string.
 
 ### Keyboard Objects
 

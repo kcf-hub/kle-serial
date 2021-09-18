@@ -1,9 +1,8 @@
-import * as JSON5 from "json5";
 import { labelMap } from "./helper";
 import { Key, Keyboard } from "./interfaces";
 
 function deserializeError(msg, data?) {
-  throw "Error: " + msg + (data ? ":\n  " + JSON5.stringify(data) : "");
+  throw "Error: " + msg + (data ? ":\n  " + JSON.stringify(data) : "");
 }
 
 // Map from serialized label position to normalized position,
