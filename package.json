@@ -1,6 +1,6 @@
 {
-  "name": "@qmk-helper/kle-serial",
-  "version": "0.15.1",
+  "name": "@kcf-hub/kle-serial",
+  "version": "0.16.0",
   "description": "Serialization library for keyboard-layout-editor.com",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,7 +20,10 @@
     "serialization",
     "json"
   ],
-  "author": "Ian Prest <npmjs.com@ian.prest.ca>",
+  "authors": [
+    "Ian Prest <npmjs.com@ian.prest.ca>",
+    "Buckwich <info@buckwich.de>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/qmk-helper/kle-serial/issues"
@@ -34,3 +37,4 @@
     "typescript": "^3.9.7"
   }
 }
+

@@ -6,3 +6,4 @@ coverage/
 images
 src
 test
+tsconfig.json
