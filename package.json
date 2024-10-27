@@ -1,6 +1,6 @@
 {
   "name": "@kcf-hub/kle-serial",
-  "version": "0.16.1",
+  "version": "0.16.2",
   "description": "Serialization library for keyboard-layout-editor.com",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
