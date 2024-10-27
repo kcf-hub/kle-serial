@@ -24,14 +24,14 @@ Added serialization, it should behave similar to the kle website
 ### New serialize function:
 
 ```ts
-import { Serial } from "@qmk-helper/kle-serial";
+import { Serial } from "@kcf-hub/kle-serial";
 
 let object = Serial.serialize(<YourKeyboardObject>); //returns an object
 let jsonString = Serial.stringify(<YourKeyboardObject>); //returns a json string, same as `JSON.stringify(Serial.serialize(object))`
 ```
 
 ```js
-var kle = require("@qmk-helper/kle-serial");
+var kle = require("@kcf-hub/kle-serial");
 
 var object = kle.Serial.serialize(<YourKeyboardObject>);  //returns an object
 var jsonString = kle.Serial.stringify(<YourKeyboardObject>); //returns a json string, same as `JSON.stringify(Serial.serialize(object))`
