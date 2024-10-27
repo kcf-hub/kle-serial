@@ -1,4 +1,3 @@
-import * as JSON5 from "json5";
 import { labelMap } from "./helper";
 import { Key, Keyboard, KeyboardMetadata } from "./interfaces";
 
@@ -10,7 +9,7 @@ function serializeProp(props, nname, val, defval) {
   return val;
 }
 function serializeError(msg: string, data?: any) {
-  throw "Error: " + msg + (data ? ":\n  " + JSON5.stringify(data) : "");
+  throw "Error: " + msg + (data ? ":\n  " + JSON.stringify(data) : "");
 }
 function isEmptyObject(o) {
   for (var prop in o) return false;
