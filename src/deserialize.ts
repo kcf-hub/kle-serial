@@ -40,7 +40,7 @@ export function deserialize(rows: Array<any>): Keyboard {
   // Initialize with defaults
   let current: Key = new Key();
   let kbd = new Keyboard();
-  let cluster = { x: 0, y: 0 };
+
   var align = 4;
 
   for (var r = 0; r < rows.length; ++r) {
@@ -88,16 +88,7 @@ export function deserialize(rows: Array<any>): Keyboard {
             );
           }
           if (item.r != null) current.rotation_angle = item.r;
-          if (item.rx != null) {
-            current.rotation_x = cluster.x = item.rx;
-            current.x = cluster.x;
-            current.y = cluster.y;
-          }
-          if (item.ry != null) {
-            current.rotation_y = cluster.y = item.ry;
-            current.x = cluster.x;
-            current.y = cluster.y;
-          }
+
           if (item.rx != null) current.rotation_x = item.rx;
           if (item.ry != null) current.rotation_y = item.ry;
           if (item.a != null) align = item.a;
@@ -117,6 +108,14 @@ export function deserialize(rows: Array<any>): Keyboard {
           }
           if (item.x) current.x += item.x;
           if (item.y) current.y += item.y;
+          if (item.x) {
+            if (item.r || item.rx || item.ry) current.x = item.x;
+            else current.x += item.x;
+          }
+          if (item.y) {
+            if (item.r || item.rx || item.ry) current.y = item.y;
+            else current.y += item.y;
+          }
           if (item.w) current.width = current.width2 = item.w;
           if (item.h) current.height = current.height2 = item.h;
           if (item.x2) current.x2 = item.x2;
@@ -135,7 +134,7 @@ export function deserialize(rows: Array<any>): Keyboard {
 
       // End of the row
       current.y++;
-      current.x = current.rotation_x;
+      current.x = 0;
     } else if (typeof rows[r] === "object") {
       if (r != 0) {
         deserializeError(
