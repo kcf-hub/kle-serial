@@ -123,9 +123,10 @@ describe("deserialization", function () {
       // expect(output).to.deep.equal(input);
     });
 
-    it("should add x and y to center of rotation", function() {
-      var result = kbd.Serial.deserialize([[{r:10,rx:1,ry:1,y:-1.1,x:2},"E"]]);
-      expect(result).to.be.an.instanceOf(kbd.Keyboard);
+    it("should add x and y to center of rotation", function () {
+      var result = kbd.deserialize([
+        [{ r: 10, rx: 1, ry: 1, y: -1.1, x: 2 }, "E"],
+      ]);
       expect(result.keys).to.have.length(1);
       expect(result.keys[0].x).to.equal(3);
       expect(result.keys[0].y).to.be.closeTo(-0.1, 0.0001);
