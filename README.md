@@ -56,13 +56,13 @@ Serial.deserialize(JSON5.parse(<YourKeyboardObject>));
 Install the package via NPM:
 
 ```bash
-npm install @ijprest/kle-serial --save
+npm install kcf-hub/kle-serial
 ```
 
 ## Usage
 
 ```js
-var kle = require("@ijprest/kle-serial");
+var kle = require("kcf-hub/kle-serial");
 
 var keyboard = kle.Serial.deserialize([
   { name: "Sample", author: "Your Name" },
