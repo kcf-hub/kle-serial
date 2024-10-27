@@ -1,11 +1,5 @@
 # kle-serial
 
-[![Build Status](https://travis-ci.org/ijprest/kle-serial.svg?branch=master)](https://travis-ci.org/ijprest/kle-serial)
-[![Coverage Status](https://coveralls.io/repos/github/ijprest/kle-serial/badge.svg?branch=master)](https://coveralls.io/github/ijprest/kle-serial?branch=master)
-[![npm version](https://badge.fury.io/js/%40ijprest%2Fkle-serial.svg)](https://badge.fury.io/js/%40ijprest%2Fkle-serial)
-[![Dependency Status](https://david-dm.org/ijprest/kle-serial.svg)](https://david-dm.org/ijprest/kle-serial)
-[![GitHub](https://img.shields.io/github/license/ijprest/kle-serial.svg)](LICENSE)
-
 This is a [MIT-licensed](LICENSE) javascript library for parsing the serialized
 format used on keyboard-layout-editor.com (KLE) and converting it into something
 that is easier to understand and use in third-party applications.
@@ -25,36 +19,36 @@ so by using it, you can be sure that you are 100% compatible with the editor.
 
 ## Fork
 
-Added serialization, at the moment this is a direct extraction of the old JS
-code from teh websote / Github Repo. Todos are testing and correct type
-annotations. At the same time I split the code in seperate files for better
-readability.
+Added serialization, it should behave similar to the kle website
 
-New function:
+### New serialize function:
 
 ```ts
 import { Serial } from "@qmk-helper/kle-serial";
 
-let object = Serial.serialize(Your Keyboard object);
-let jsonString = Serial.stringify(Your Keyboard object);
+let object = Serial.serialize(<YourKeyboardObject>); //returns an object
+let jsonString = Serial.stringify(<YourKeyboardObject>); //returns a json string, same as `JSON.stringify(Serial.serialize(object))`
 ```
 
 ```js
 var kle = require("@qmk-helper/kle-serial");
 
-var object = kle.Serial.serialize(Your Keyboard object);
-var jsonString = kle.Serial.stringify(Your Keyboard object);
+var object = kle.Serial.serialize(<YourKeyboardObject>);  //returns an object
+var jsonString = kle.Serial.stringify(<YourKeyboardObject>); //returns a json string, same as `JSON.stringify(Serial.serialize(object))`
 ```
 
-To use this fork the best option currently is to link this package in place
-until it is merged:
+### Breaking change:
 
-```bash
-# clone and npm i this repo. Run in folder
-npm link
+No longer comes packaged with JSON5 (thx BigBlueHat) to keep the package smaller
 
-# In your project
-npm link @qmk-helper/kle-serial
+If you want to use JSON5, you can install it yourself.
+
+```ts
+
+import * as JSON5 from "json5";
+
+Serial.deserialize(JSON5.parse(<YourKeyboardObject>));
+
 ```
 
 ## Installation
@@ -72,7 +66,7 @@ var kle = require("@ijprest/kle-serial");
 
 var keyboard = kle.Serial.deserialize([
   { name: "Sample", author: "Your Name" },
-  ["Q", "W", "E", "R", "T", "Y"]
+  ["Q", "W", "E", "R", "T", "Y"],
 ]);
 
 // or
@@ -271,3 +265,4 @@ In rough order of priority:
 ```bash
 npm test
 ```
+

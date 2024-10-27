@@ -147,7 +147,7 @@ describe("deserialization", function () {
 
     it("should default width2/height2 if not specified", function () {
       var result = kbd.deserialize([
-        [{ w: 2, h: 2 }, "1", { w: 2, h: 2, w2: 4, h2: 4 }, "2"]
+        [{ w: 2, h: 2 }, "1", { w: 2, h: 2, w2: 4, h2: 4 }, "2"],
       ]);
       expect(result).to.be.an.instanceOf(kbd.KleKeyboard);
       expect(result.keys).to.have.length(2);
@@ -250,7 +250,7 @@ describe("deserialization", function () {
 
     it("should apply `t` to all legends", function () {
       const input = [
-        [{ a: 0, t: "#444444" }, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11"]
+        [{ a: 0, t: "#444444" }, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11"],
       ];
       var result = kbd.deserialize(input);
       expect(result).to.be.an.instanceOf(kbd.KleKeyboard);
@@ -289,7 +289,7 @@ describe("deserialization", function () {
         "XX\n#666666\nXX\n#888888\n" +
         "#999999\n#aaaaaa\n#bbbbbb\n#cccccc";
       const input = [
-        [{ a: 0, t: /*colors*/ labels.replace(/XX/g, "") }, /*labels*/ labels]
+        [{ a: 0, t: /*colors*/ labels.replace(/XX/g, "") }, /*labels*/ labels],
       ];
       var result = kbd.deserialize(input);
       expect(result).to.be.an.instanceOf(kbd.KleKeyboard);
@@ -326,8 +326,8 @@ describe("deserialization", function () {
           { t: "\n#ff0000" },
           "\n2",
           { t: "\n#00ff00" },
-          "\n3"
-        ]
+          "\n3",
+        ],
       ];
       var result = kbd.deserialize(input);
       expect(result).to.be.an.instanceOf(kbd.KleKeyboard);
@@ -411,7 +411,7 @@ describe("deserialization", function () {
       for (var a = 0; a < 7; ++a) {
         var name = `a=${a}`;
         const input = [
-          [{ f: 1, a: a }, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11"]
+          [{ f: 1, a: a }, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11"],
         ];
         var result = kbd.deserialize(input);
         expect(result, name).to.be.an.instanceOf(kbd.KleKeyboard);
@@ -427,7 +427,7 @@ describe("deserialization", function () {
       for (var a = 0; a < 7; ++a) {
         var name = `a=${a}`;
         const input = [
-          [{ f: 1, f2: 2, a: a }, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11"]
+          [{ f: 1, f2: 2, a: a }, "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11"],
         ];
         var result = kbd.deserialize(input);
         expect(result, name).to.be.an.instanceOf(kbd.KleKeyboard);
@@ -458,8 +458,8 @@ describe("deserialization", function () {
         const input = [
           [
             { f: 1, fa: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], a: a },
-            "2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13"
-          ]
+            "2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13",
+          ],
         ];
         var result = kbd.deserialize(input);
         expect(result, name).to.be.an.instanceOf(kbd.KleKeyboard);
@@ -482,14 +482,14 @@ describe("deserialization", function () {
         const input = [
           [
             { f: 1, fa: [, 2, , 4, , 6, , 8, 9, 10, , 12], a: a },
-            "x\n2\nx\n4\nx\n6\nx\n8\n9\n10\nx\n12"
-          ]
+            "x\n2\nx\n4\nx\n6\nx\n8\n9\n10\nx\n12",
+          ],
         ];
         const expected = [
           [
             { f: 1, fa: [0, 2, 0, 4, 0, 6, 0, 8, 9, 10, 0, 12], a: a },
-            "x\n2\nx\n4\nx\n6\nx\n8\n9\n10\nx\n12"
-          ]
+            "x\n2\nx\n4\nx\n6\nx\n8\n9\n10\nx\n12",
+          ],
         ];
         var result = kbd.deserialize(input);
         expect(result, name).to.be.an.instanceOf(kbd.KleKeyboard);
@@ -519,7 +519,7 @@ describe("deserialization", function () {
 
     it("should delete values equal to the default", function () {
       const input = [
-        [{ f: 1 }, "1", { fa: "\n1" }, "\n2", { fa: "\n2" }, "\n3"]
+        [{ f: 1 }, "1", { fa: "\n1" }, "\n2", { fa: "\n2" }, "\n3"],
       ];
       var result = kbd.deserialize(input);
       expect(result).to.be.an.instanceOf(kbd.KleKeyboard);
@@ -531,33 +531,6 @@ describe("deserialization", function () {
 
       var output = kbd.serialize(result);
       // expect(output).to.deep.equal(input);
-    });
-  });
-
-  describe("of strings", function () {
-    it("should be lenient about quotes", function () {
-      var result1 = () =>
-        kbd.parse(`[
-        { name: "Sample", author: "Your Name" },
-        ["Q", "W", "E", "R", "T", "Y"]
-      ]`);
-
-      var result2 = () =>
-        kbd.parse(`[
-        { "name": "Sample", "author": "Your Name" },
-        ["Q", "W", "E", "R", "T", "Y"]
-      ]`);
-
-      var result3 = () =>
-        kbd.deserialize([
-          { name: "Sample", author: "Your Name" },
-          ["Q", "W", "E", "R", "T", "Y"]
-        ]);
-
-      expect(result1).to.not.throw();
-      expect(result2).to.not.throw();
-      expect(result1(), "1<>2").to.deep.equal(result2());
-      expect(result1(), "1<>3").to.deep.equal(result3());
     });
   });
 });
@@ -587,3 +560,4 @@ describe("serialization", function () {
     expect(output).to.equal(input);
   });
 });
+
